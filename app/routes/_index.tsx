@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import Pokemon from "~/components/home/Pokemon";
 
 import axios from "~/config/axios";
@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 
 export const loader = async () => {
   const response = await axios.get("/pokemon");
-  const data = response.data;
+  const data = await response.data;
   return data;
 };
 
@@ -26,6 +26,8 @@ export default function Index() {
       <h1 className="font-bold mb-5 text-4xl text-gray-700">
         Pokedex
       </h1>
+
+      <Link to="/about">go about page</Link>
 
       <div className="flex flex-col space-y-5">
         {data.results.map((pokemon) => (
